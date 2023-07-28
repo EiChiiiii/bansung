@@ -5,7 +5,6 @@ using UnityEngine;
 public class Playerr : MonoBehaviour
 {
     public float moveSpeed ;
-
     public float dashBoost;
     private float dashTime;
     public float DashTime;
@@ -13,6 +12,7 @@ public class Playerr : MonoBehaviour
     public Rigidbody2D rb;
     public Animator animator;
     public Vector3 moveInput;
+    public SpriteRenderer Character;
 
     void Start()
     {
@@ -52,8 +52,8 @@ public class Playerr : MonoBehaviour
         // quay dau // Rotate Face
         if (moveInput.x != 0)
             if (moveInput.x > 0)
-            transform.localScale = new Vector3(1, 1, 0);
+            Character.transform.localScale = new Vector3(1, 1, 0);
             else
-            transform.localScale = new Vector3(-1, 1, 0);
+            Character.transform.localScale = new Vector3(-1, 1, 0);
     }
 }

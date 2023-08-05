@@ -22,6 +22,7 @@ public class Weapon : MonoBehaviour
         }
     }
 
+    // xoay huong
     void RotateGun()
     {
         Vector3 mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
@@ -36,7 +37,8 @@ public class Weapon : MonoBehaviour
         else 
         transform.localScale = new Vector3(1, 1, 0);
     }
-
+    
+    // ban dan
     void FireBullet()
     {
         timeBtwFire = TimeBtwFire;

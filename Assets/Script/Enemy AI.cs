@@ -5,15 +5,15 @@ using Pathfinding;
 
 public class EnemyAI : MonoBehaviour
 {
-    public Transform target;
-    public bool roaming = true;
-    public float moveSpeed = 2f;
-    public float nextWayPointDistance = 2f;
+    public Transform target; 
+    public bool roaming = true; // cho phep di chuyen xung quanh
+    public float moveSpeed = 2f; // toc do di chuyen
+    public float nextWayPointDistance = 2f; 
     public float repeatTimeUpdatePath = 0.5f;
     public bool isShootable = false;
     public GameObject bulletEnemy;
-    public float bulletSpeed;
-    public float timeBtwFire;
+    public float bulletSpeed; // toc do ban
+    public float timeBtwFire; 
     public float fireCooldown;
     public SpriteRenderer characterSR;
     public Seeker seeker;
@@ -24,14 +24,10 @@ public class EnemyAI : MonoBehaviour
 
     Coroutine moveCoroutine;
 
-    public float freezeDurationTime;
-    float freezeDuration;
-
     private void Start()
     {
         seeker = GetComponent<Seeker>();
         rb = GetComponent<Rigidbody2D>();
-        freezeDuration = 0;
         target = FindObjectOfType<Playerr>().transform;
 
         InvokeRepeating("CalculatePath", 0f, repeatTimeUpdatePath);
@@ -82,23 +78,12 @@ public class EnemyAI : MonoBehaviour
         moveCoroutine = StartCoroutine(MoveToTargetCoroutine());
     }
 
-    public void FreezeEnemy()
-    {
-        freezeDuration = freezeDurationTime;
-    }
-
     IEnumerator MoveToTargetCoroutine()
     {
         int currentWP = 0;
 
         while (currentWP < path.vectorPath.Count)
         {
-            while (freezeDuration > 0)
-            {
-                freezeDuration -= Time.deltaTime;
-                yield return null;
-            }
-
             Vector2 direction = ((Vector2)path.vectorPath[currentWP] - rb.position).normalized;
             Vector2 force = direction * moveSpeed * Time.deltaTime;
             transform.position += (Vector3)force;
